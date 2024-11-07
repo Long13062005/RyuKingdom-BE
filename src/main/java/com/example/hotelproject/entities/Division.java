@@ -19,4 +19,9 @@ public class Division {
 
     @Column(nullable = false)
     private boolean deleted = false;
+
+    public Division(String name, boolean deleted) {
+        this.name = name;
+        this.deleted = deleted;
+    }
 }

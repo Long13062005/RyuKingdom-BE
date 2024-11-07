@@ -20,5 +20,8 @@ public class Position {
     @Column(nullable = false)
     private boolean deleted = false;
 
-
+    public Position(String name, boolean deleted) {
+        this.name = name;
+        this.deleted = deleted;
+    }
 }

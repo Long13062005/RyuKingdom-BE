@@ -19,4 +19,9 @@ public class Degree {
 
     @Column(nullable = false)
     private boolean deleted = false;
+
+    public Degree(String name, boolean deleted) {
+        this.name = name;
+        this.deleted = deleted;
+    }
 }

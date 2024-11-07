@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AttachFacilityRepository extends JpaRepository<AttachFacility, Long> {
-    AttachFacility findByName(String name);
 }

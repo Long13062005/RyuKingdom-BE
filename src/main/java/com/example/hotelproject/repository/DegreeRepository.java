@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 @Repository
 public interface DegreeRepository extends JpaRepository<Degree, Long> {
-    Optional<Degree> findByEducationDegreeName(String educationDegreeName);
+    Degree findByName(String name);
 }

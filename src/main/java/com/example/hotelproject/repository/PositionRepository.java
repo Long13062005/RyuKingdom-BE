@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 @Repository
 public interface PositionRepository extends JpaRepository<Position, Long> {
-    Optional<Position> findByPositionName(String positionName);
+    Position findByName(String name);
 }

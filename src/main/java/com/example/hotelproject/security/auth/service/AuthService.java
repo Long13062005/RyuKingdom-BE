@@ -94,10 +94,9 @@ public class AuthService implements IAuthService {
 
             var user = userRepository.findByUsername(loginRequest.getUsername()).orElseThrow();
             var jwt = jwtUtils.generateToken(user);
-            var refreshToken = jwtUtils.generateRefreshToken(new HashMap<>(), user);
             response.setStatusCode(200);
             response.setToken(jwt);
-            response.setRefreshToken(refreshToken);
+            response.setRoles(roleRepository.findByName(user.getRole().getName()));
             response.setExpirationTime("30M");
             response.setMessage("Successfully Logged In");
 

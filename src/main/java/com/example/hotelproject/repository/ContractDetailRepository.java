@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ContractDetailRepository extends JpaRepository<ContractDetail, Long> {
-    ContractDetail findByName(String name);
 }

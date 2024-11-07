@@ -1,8 +1,8 @@
 package com.example.hotelproject.config;
 
-import com.example.hotelproject.entities.Role;
-import com.example.hotelproject.entities.TypeCustomer;
+import com.example.hotelproject.entities.*;
 import com.example.hotelproject.repository.*;
+import com.example.hotelproject.security.user_auth.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -30,16 +30,27 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
     @Autowired
     private TypeCustomerRepository typeCustomerRepository;
 
+    @Autowired
+    private DegreeRepository degreeRepository;
+
+    @Autowired
+    private PositionRepository positionRepository;
+
+    @Autowired
+    private DivisionRepository divisionRepository;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         if (roleRepository.findByName("ROLE_ADMIN") == null) {
             roleRepository.save(new Role("ROLE_ADMIN", false));
         }
 
-        if (roleRepository.findByName("ROLE_STAFF") == null) {
-            roleRepository.save(new Role("ROLE_STAFF", false));
+        if (roleRepository.findByName("ROLE_MANAGER") == null) {
+            roleRepository.save(new Role("ROLE_MANAGER", false));
         }
-
+        if (roleRepository.findByName("ROLE_RECEPTIONIST") == null) {
+            roleRepository.save(new Role("ROLE_RECEPTIONIST", false));
+        }
         if (roleRepository.findByName("ROLE_CUSTOMER") == null) {
             roleRepository.save(new Role("ROLE_CUSTOMER", false));
         }
@@ -52,40 +63,114 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
         if (typeCustomerRepository.findByName("VIP") == null) {
             typeCustomerRepository.save(new TypeCustomer("VIP", false));
         }
-       /* if(userRepository.findByUsername("admin").isEmpty()){
+        if (divisionRepository.findByName("FRESHER") == null) {
+            divisionRepository.save(new Division("FRESHER", false));
+        }
+        if (divisionRepository.findByName("JUNIOR") == null) {
+            divisionRepository.save(new Division("JUNIOR", false));
+        }
+        if (divisionRepository.findByName("SENIOR") == null) {
+            divisionRepository.save(new Division("SENIOR", false));
+        }
+        if (positionRepository.findByName("DANANG") == null) {
+            positionRepository.save(new Position("DANANG", false));
+        }
+        if (positionRepository.findByName("HCM") == null) {
+            positionRepository.save(new Position("HCM", false));
+        }
+        if (positionRepository.findByName("HANOI") == null) {
+            positionRepository.save(new Position("HANOI", false));
+        }
+        if (degreeRepository.findByName("BACHELOR") == null) {
+            degreeRepository.save(new Degree("BACHELOR", false));
+        }
+        if (degreeRepository.findByName("MASTER") == null) {
+            degreeRepository.save(new Degree("MASTER", false));
+        }
+        if (userRepository.findByUsername("admin123").isEmpty()) {
             User admin = new User();
-            admin.setUsername("admin");
+            admin.setUsername("admin123");
             admin.setPassword(passwordEncoder.encode("admin123"));
-            admin.setRole(roleRepository.findByName("ADMIN"));
+            admin.setRole(roleRepository.findByName("ROLE_ADMIN"));
             userRepository.save(admin);
+            Employee adminEmployee = new Employee();
+            adminEmployee.setUser(admin);
+            adminEmployee.setAddress("Hanoi");
+            adminEmployee.setDob("1999-01-01");
+            adminEmployee.setEmail("admin@gmail.com");
+            adminEmployee.setDegree(degreeRepository.findByName("MASTER"));
+            adminEmployee.setDivision(divisionRepository.findByName("SENIOR"));
+            adminEmployee.setGender(1);
+            adminEmployee.setIdCard("123456789");
+            adminEmployee.setName("admin");
+            adminEmployee.setPhoneNumber("123456789");
+            adminEmployee.setPosition(positionRepository.findByName("HANOI"));
+            adminEmployee.setSalary(10000000.0);
+            employeeRepository.save(adminEmployee);
         }
-        if(staffRepository.findByUser_Username("admin") == null){
-            User admin = userRepository.findByUsername("admin").get();
-            Staff staff = new Staff();
-            staff.setFullName("admin");
-            staff.setAddress("admin");
-            staff.setDob("1111/11/11");
-            staff.setPhoneNumber("0123456789");
-            staff.setUser(admin);
-            staffRepository.save(staff);
+
+        if (userRepository.findByUsername("receptionist123").isEmpty()) {
+            User staff = new User();
+            staff.setUsername("receptionist123");
+            staff.setPassword(passwordEncoder.encode("receptionist123"));
+            staff.setRole(roleRepository.findByName("ROLE_RECEPTIONIST"));
+            userRepository.save(staff);
+            Employee staffEmployee = new Employee();
+            staffEmployee.setUser(staff);
+            staffEmployee.setAddress("Hanoi");
+            staffEmployee.setDob("1990-01-01");
+            staffEmployee.setEmail("staff@gmail.com");
+            staffEmployee.setDegree(degreeRepository.findByName("BACHELOR"));
+            staffEmployee.setDivision(divisionRepository.findByName("JUNIOR"));
+            staffEmployee.setGender(1);
+            staffEmployee.setIdCard("987654321");
+            staffEmployee.setName("staff");
+            staffEmployee.setPhoneNumber("987654321");
+            staffEmployee.setPosition(positionRepository.findByName("HANOI"));
+            staffEmployee.setSalary(8000000.0);
+            employeeRepository.save(staffEmployee);
         }
-        if(userRepository.findByUsername("staff").isEmpty()){
-            User admin = new User();
-            admin.setUsername("staff");
-            admin.setPassword(passwordEncoder.encode("staff123"));
-            admin.setRole(roleRepository.findByName("STAFF"));
-            userRepository.save(admin);
+
+        if (userRepository.findByUsername("manager123").isEmpty()) {
+            User manager = new User();
+            manager.setUsername("manager123");
+            manager.setPassword(passwordEncoder.encode("manager123"));
+            manager.setRole(roleRepository.findByName("ROLE_MANAGER"));
+            userRepository.save(manager);
+            Employee managerEmployee = new Employee();
+            managerEmployee.setUser(manager);
+            managerEmployee.setAddress("Hanoi");
+            managerEmployee.setDob("1985-01-01");
+            managerEmployee.setEmail("manager@gmail.com");
+            managerEmployee.setDegree(degreeRepository.findByName("MASTER"));
+            managerEmployee.setDivision(divisionRepository.findByName("SENIOR"));
+            managerEmployee.setGender(1);
+            managerEmployee.setIdCard("112233445");
+            managerEmployee.setName("manager");
+            managerEmployee.setPhoneNumber("112233445");
+            managerEmployee.setPosition(positionRepository.findByName("HANOI"));
+            managerEmployee.setSalary(15000000.0);
+            employeeRepository.save(managerEmployee);
         }
-        if(staffRepository.findByUser_Username("staff") == null){
-            User admin = userRepository.findByUsername("staff").get();
-            Staff staff = new Staff();
-            staff.setFullName("staff");
-            staff.setAddress("staff");
-            staff.setDob("1111/11/11");
-            staff.setPhoneNumber("0123456789");
-            staff.setUser(admin);
-            staffRepository.save(staff);
-        }*/
+        if (userRepository.findByUsername("customer123").isEmpty()) {
+            User customer = new User();
+            customer.setUsername("customer123");
+            customer.setPassword(passwordEncoder.encode("customer123"));
+            customer.setRole(roleRepository.findByName("ROLE_CUSTOMER"));
+            userRepository.save(customer);
+            Customer customer1 = new Customer();
+            customer1.setUser(customer);
+            customer1.setAddress("Hanoi");
+            customer1.setDob("1985-01-01");
+            customer1.setEmail("customer@gmail.com");
+            customer1.setGender(1);
+            customer1.setIdCard("112233445");
+            customer1.setName("customer");
+            customer1.setPhoneNumber("112233445");
+            customer1.setTypeCustomer(typeCustomerRepository.findByName("BRONZE"));
+            customer1.setDeleted(false);
+            customerRepository.save(customer1);
+        }
     }
 
     @Override
