@@ -1,10 +1,20 @@
 package com.example.hotelproject.service;
 
+import com.example.hotelproject.controller.dto.response.ContractDto;
+import com.example.hotelproject.entities.Contract;
+
+import java.util.List;
+
 public interface IContractService {
-    void deleteContract(Long id);
-    void updateContract(Long id, String name);
-    void addContract(String name);
-    void getAllContracts();
-    void getContractById(Long id);
-    void getContractByName(String name);
+    List<Contract> getAll();
+
+    List<Contract> findByCustomer(Long id);
+
+    ContractDto getById(Long id);
+
+    Contract save(ContractDto contractDto);
+
+    void delete(Long id);
+
+    Contract update(ContractDto contractDto, Long id);
 }

@@ -22,4 +22,9 @@ public class TypeRent {
 
     @Column(nullable = false)
     private String description;
+
+    public TypeRent(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 }

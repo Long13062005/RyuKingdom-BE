@@ -1,10 +1,18 @@
 package com.example.hotelproject.service.impl;
 
+import com.example.hotelproject.entities.Division;
+import com.example.hotelproject.repository.DivisionRepository;
 import com.example.hotelproject.service.IDivisionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DivisionService implements IDivisionService {
+
+    @Autowired
+    private DivisionRepository divisionRepository;
     @Override
     public void deleteDivision(Long id) {
         // TODO Auto-generated method stub
@@ -21,8 +29,9 @@ public class DivisionService implements IDivisionService {
     }
 
     @Override
-    public void getAllDivisions() {
+    public List<Division> getAllDivisions() {
         // TODO Auto-generated method stub
+        return divisionRepository.findAll();
     }
 
     @Override

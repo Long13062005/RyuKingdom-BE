@@ -7,12 +7,12 @@ import com.example.hotelproject.security.auth.request.RegisterReq;
 
 public interface IAuthService {
 
-    public MessengerRes register(RegisterReq registrationRequest);
+    MessengerRes register(RegisterReq registrationRequest);
 
-    public MessengerRes login(AuthReq loginRequest);
+    MessengerRes login(AuthReq loginRequest);
 
-    public MessengerRes refreshToken(AuthReq refreshTokenReqiest);
+    MessengerRes refreshToken(AuthReq refreshTokenReqiest);
 
 
-    public MessengerRes logout(AuthReq logoutRequest);
+    MessengerRes logout(AuthReq logoutRequest);
 }

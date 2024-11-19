@@ -1,10 +1,24 @@
 package com.example.hotelproject.service;
 
+import com.example.hotelproject.controller.dto.response.PaymentDto;
+import com.example.hotelproject.entities.Customer;
+import com.example.hotelproject.entities.Employee;
+import com.example.hotelproject.entities.Payment;
+
+import java.util.List;
+
 public interface IPaymentService {
+
+    List<Payment> getAllPayments();
+
+    PaymentDto getPaymentById(Long id);
+
+    Payment savePayment(PaymentDto paymentDto);
+
     void deletePayment(Long id);
-    void updatePayment(Long id, String name);
-    void addPayment(String name);
-    void getAllPayments();
-    void getPaymentById(Long id);
-    void getPaymentByName(String name);
+
+    Payment updatePayment(Long id, PaymentDto paymentDto);
+
+    List<Payment> findPaymentByCustomer(Customer customer);
+
 }

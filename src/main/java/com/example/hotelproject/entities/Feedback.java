@@ -20,7 +20,6 @@ public class Feedback {
     private int rating;
 
     private boolean deleted = false;
-
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;

@@ -1,10 +1,16 @@
 package com.example.hotelproject.service;
 
+import com.example.hotelproject.controller.dto.response.FeedbackDto;
+import com.example.hotelproject.entities.Feedback;
+
+import java.util.List;
+
 public interface IFeedbackService {
-    void deleteFeedback(Long id);
-    void updateFeedback(Long id, String name);
-    void addFeedback(String name);
-    void getAllFeedbacks();
-    void getFeedbackById(Long id);
-    void getFeedbackByName(String name);
+List<Feedback> getAllFeedbacks();
+Feedback getFeedbackById(Long id);
+Feedback getFeedbackByName(String name);
+
+     Feedback addFeedback(FeedbackDto feedbackDto) ;
+
+void softDeleteFeedbackById(Long id);
 }

@@ -49,5 +49,4 @@ public class Employee {
     private String address;
     @Column(nullable = false)
     private boolean deleted = false;
-
 }

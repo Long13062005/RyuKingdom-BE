@@ -51,4 +51,5 @@ public class Facility {
 
     @Column(nullable = false)
     private boolean deleted = false;
+
 }

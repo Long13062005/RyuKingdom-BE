@@ -28,7 +28,6 @@ public class Report {
 
     @Column(nullable = false)
     private boolean deleted = false;
-
     @ManyToOne
     @JoinColumn(name = "Employee_id", nullable = false)
     private Employee employee;

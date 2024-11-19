@@ -6,11 +6,13 @@ import com.example.hotelproject.entities.Customer;
 import java.util.List;
 
 public interface ICustomerService {
-    public <T> List<T> findAll(Class<T> classType);
-    public <T> T findById(int id, Class<T> classType);
-    public Customer save(Customer customer);
-    public void deleteById(int id);
-    <T> List<T> searchByCustomerName(String name,  Class<T> classType);
+List<Customer> findAll();
+Customer findById(int id);
+Customer save(Customer customer);
+void deleteById(Long id);
 
-    <T> T findByEmail(String email);
+Customer findByName(String name);
+
+Customer findCustomerByUser_Username(String username);
+
 }

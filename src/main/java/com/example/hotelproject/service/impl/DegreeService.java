@@ -1,10 +1,18 @@
 package com.example.hotelproject.service.impl;
 
+import com.example.hotelproject.entities.Degree;
+import com.example.hotelproject.repository.DegreeRepository;
 import com.example.hotelproject.service.IDegreeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DegreeService implements IDegreeService {
+
+    @Autowired
+    private DegreeRepository degreeRepository;
     @Override
     public void deleteDegree(Long id) {
         // TODO Auto-generated method stub
@@ -21,8 +29,9 @@ public class DegreeService implements IDegreeService {
     }
 
     @Override
-    public void getAllDegrees() {
+    public List<Degree> getAllDegrees() {
         // TODO Auto-generated method stub
+        return degreeRepository.findAll();
     }
 
     @Override

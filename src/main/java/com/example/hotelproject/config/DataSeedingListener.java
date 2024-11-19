@@ -39,6 +39,19 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
     @Autowired
     private DivisionRepository divisionRepository;
 
+    @Autowired
+    private TypeFacilityRepository typeFacilityRepository;
+
+    @Autowired
+    private TypeRentRepository typeRentRepository;
+
+    @Autowired
+    private FacilityRepository facilityRepository;
+
+    @Autowired
+    private AttachFacilityRepository attachFacilityRepository;
+
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         if (roleRepository.findByName("ROLE_ADMIN") == null) {
@@ -171,6 +184,176 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
             customer1.setDeleted(false);
             customerRepository.save(customer1);
         }
+        if (typeFacilityRepository.findByName("ROOM") == null) {
+            typeFacilityRepository.save(new TypeFacility("ROOM", "ROOM", false));
+        }
+        if (typeFacilityRepository.findByName("SUITE") == null) {
+            typeFacilityRepository.save(new TypeFacility("SUITE", "SUITE", false));
+        }
+        if (typeFacilityRepository.findByName("VIILA") == null) {
+            typeFacilityRepository.save(new TypeFacility("VIILA", "VIILA", false));
+        }
+        if (typeRentRepository.findByName("HOUR") == null) {
+            typeRentRepository.save(new TypeRent("HOUR", "HOUR"));
+        }
+        if (typeRentRepository.findByName("DAY") == null) {
+            typeRentRepository.save(new TypeRent("DAY", "DAY"));
+        }
+        if (typeRentRepository.findByName("MONTH") == null) {
+            typeRentRepository.save(new TypeRent("MONTH", "MONTH"));
+        }
+        if (facilityRepository.findByName("ROOM 1") == null) {
+            Facility facility = new Facility();
+            facility.setName("ROOM 1");
+            facility.setCost(400);
+            facility.setArea(20);
+            facility.setMaxPeople(2);
+            facility.setStandardRoom("STANDARD");
+            facility.setDescription("Standard room");
+            facility.setPoolArea(0);
+            facility.setNumberOfFloors(1);
+            facility.setTypeFacility(typeFacilityRepository.findByName("ROOM"));
+            facility.setTypeRent(typeRentRepository.findByName("HOUR"));
+            facility.setDeleted(false);
+            facilityRepository.save(facility);
+        }
+        if (facilityRepository.findByName("ROOM 2") == null) {
+            Facility facility = new Facility();
+            facility.setName("ROOM 2");
+            facility.setCost(500);
+            facility.setArea(20);
+            facility.setMaxPeople(4);
+            facility.setStandardRoom("Deluxe");
+            facility.setDescription("Deluxe Room");
+            facility.setPoolArea(0);
+            facility.setNumberOfFloors(1);
+            facility.setTypeFacility(typeFacilityRepository.findByName("ROOM"));
+            facility.setTypeRent(typeRentRepository.findByName("HOUR"));
+            facility.setDeleted(false);
+            facilityRepository.save(facility);
+        }
+        if (facilityRepository.findByName("ROOM 3") == null) {
+            Facility facility = new Facility();
+            facility.setName("ROOM 3");
+            facility.setCost(600);
+            facility.setArea(40);
+            facility.setMaxPeople(4);
+            facility.setStandardRoom("Executive");
+            facility.setDescription("Executive Room");
+            facility.setPoolArea(0);
+            facility.setNumberOfFloors(1);
+            facility.setTypeFacility(typeFacilityRepository.findByName("ROOM"));
+            facility.setTypeRent(typeRentRepository.findByName("DAY"));
+            facility.setDeleted(false);
+            facilityRepository.save(facility);
+        }
+        if (facilityRepository.findByName("SUITE 1") == null) {
+            Facility facility = new Facility();
+            facility.setName("SUITE 1");
+            facility.setCost(1200);
+            facility.setArea(100);
+            facility.setMaxPeople(8);
+            facility.setStandardRoom("Small Suite");
+            facility.setDescription("Small Suite");
+            facility.setPoolArea(0);
+            facility.setNumberOfFloors(1);
+            facility.setTypeFacility(typeFacilityRepository.findByName("SUITE"));
+            facility.setTypeRent(typeRentRepository.findByName("DAY"));
+            facility.setDeleted(false);
+            facilityRepository.save(facility);
+        }
+        if (facilityRepository.findByName("SUITE 2") == null) {
+            Facility facility = new Facility();
+            facility.setName("SUITE 2");
+            facility.setCost(1500);
+            facility.setArea(100);
+            facility.setMaxPeople(8);
+            facility.setStandardRoom("Presidential Suite");
+            facility.setDescription("Presidential Suite");
+            facility.setPoolArea(20);
+            facility.setNumberOfFloors(2);
+            facility.setTypeFacility(typeFacilityRepository.findByName("SUITE"));
+            facility.setTypeRent(typeRentRepository.findByName("DAY"));
+            facility.setDeleted(false);
+            facilityRepository.save(facility);
+        }
+        if (facilityRepository.findByName("Villa 1") == null) {
+            Facility facility = new Facility();
+            facility.setName("Villa 1");
+            facility.setCost(2000);
+            facility.setArea(300);
+            facility.setMaxPeople(8);
+            facility.setStandardRoom("Villa");
+            facility.setDescription("Villa");
+            facility.setPoolArea(20);
+            facility.setNumberOfFloors(2);
+            facility.setTypeFacility(typeFacilityRepository.findByName("VIILA"));
+            facility.setTypeRent(typeRentRepository.findByName("DAY"));
+            facility.setDeleted(false);
+            facilityRepository.save(facility);
+        }
+        if (attachFacilityRepository.findByName("ROOM 1") == null) {
+            AttachFacility attachFacility = new AttachFacility();
+            attachFacility.setName("ROOM 1");
+            attachFacility.setCost(400);
+            attachFacility.setDescription("Standard room");
+            attachFacility.setImage("https://firebasestorage.googleapis.com/v0/b/ryukingdom-48b31.appspot.com/o/standard-room.jpg?alt=media&token=63c4edb3-7a35-410c-b296-c733172e0af2");
+            attachFacility.setUnit(3);
+            attachFacility.setDeleted(false);
+            attachFacilityRepository.save(attachFacility);
+        }
+        if (attachFacilityRepository.findByName("ROOM 2") == null) {
+            AttachFacility attachFacility = new AttachFacility();
+            attachFacility.setName("ROOM 2");
+            attachFacility.setCost(500);
+            attachFacility.setDescription("Deluxe Room");
+            attachFacility.setUnit(3);
+            attachFacility.setImage("https://firebasestorage.googleapis.com/v0/b/ryukingdom-48b31.appspot.com/o/dex-room.jpg?alt=media&token=a169c143-a513-48d4-99cc-40d165114d88");
+            attachFacility.setDeleted(false);
+            attachFacilityRepository.save(attachFacility);
+        }
+        if (attachFacilityRepository.findByName("ROOM 3") == null) {
+            AttachFacility attachFacility = new AttachFacility();
+            attachFacility.setName("ROOM 3");
+            attachFacility.setCost(600);
+            attachFacility.setUnit(3);
+            attachFacility.setImage("https://firebasestorage.googleapis.com/v0/b/ryukingdom-48b31.appspot.com/o/ex-room.jpg?alt=media&token=e832ebf7-d112-4de3-a5b4-a2a54535be6c");
+            attachFacility.setDescription("Executive Room");
+            attachFacility.setDeleted(false);
+            attachFacilityRepository.save(attachFacility);
+        }
+        if (attachFacilityRepository.findByName("SUITE 1") == null) {
+            AttachFacility attachFacility = new AttachFacility();
+            attachFacility.setName("SUITE 1");
+            attachFacility.setCost(1200);
+            attachFacility.setDescription("Small Suite");
+            attachFacility.setUnit(3);
+            attachFacility.setImage("https://firebasestorage.googleapis.com/v0/b/ryukingdom-48b31.appspot.com/o/suite.jpg?alt=media&token=a08fdd7d-2060-46cb-b4aa-79ca387c2a8f");
+            attachFacility.setDeleted(false);
+            attachFacilityRepository.save(attachFacility);
+        }
+        if (attachFacilityRepository.findByName("SUITE 2") == null) {
+            AttachFacility attachFacility = new AttachFacility();
+            attachFacility.setName("SUITE 2");
+            attachFacility.setCost(1500);
+            attachFacility.setUnit(3);
+            attachFacility.setImage("https://firebasestorage.googleapis.com/v0/b/ryukingdom-48b31.appspot.com/o/suite-big.jpg?alt=media&token=a9055a45-a8dc-49fb-95c2-f539ca37c56c");
+            attachFacility.setDescription("Presidential Suite");
+            attachFacility.setDeleted(false);
+            attachFacilityRepository.save(attachFacility);
+        }
+        if (attachFacilityRepository.findByName("Villa 1") == null) {
+            AttachFacility attachFacility = new AttachFacility();
+            attachFacility.setName("Villa 1");
+            attachFacility.setCost(2000);
+            attachFacility.setDescription("Villa");
+            attachFacility.setUnit(3);
+            attachFacility.setImage("https://firebasestorage.googleapis.com/v0/b/ryukingdom-48b31.appspot.com/o/villa.jpg?alt=media&token=884beb65-c03b-40f0-ae02-c29e7b354361");
+            attachFacility.setDeleted(false);
+            attachFacilityRepository.save(attachFacility);
+        }
+
+
     }
 
     @Override

@@ -25,4 +25,10 @@ public class TypeFacility {
 
     @Column(nullable = false)
     private boolean deleted = false;
+
+    public TypeFacility(String name, String description, boolean deleted) {
+        this.name = name;
+        this.description = description;
+        this.deleted = deleted;
+    }
 }

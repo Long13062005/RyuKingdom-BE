@@ -1,15 +1,22 @@
 package com.example.hotelproject.service;
 
+import com.example.hotelproject.controller.dto.response.EmployeeDto;
+import com.example.hotelproject.controller.dto.response.FacilityDto;
 import com.example.hotelproject.entities.Employee;
+import com.example.hotelproject.entities.Facility;
 
 import java.util.List;
 
 public interface IEmployeeService {
-    public <T> List<T> findAll(Class<T> classType);
-    public <T> T findById(int id, Class<T> classType);
-    public Employee save(Employee customer);
-    public void deleteById(int id);
-    <T> List<T> searchByEmployeeName(String name,  Class<T> classType);
+    List<Employee> findAll();
 
-    <T> T findByEmail(String email);
+    EmployeeDto findById(Long id);
+
+    Employee save(EmployeeDto employeeDto);
+
+    void delete(Long id);
+
+    List<Facility> searchEmployee(String search);
+
+    Employee update(EmployeeDto employeeDto, Long id);
 }

@@ -1,10 +1,18 @@
 package com.example.hotelproject.service.impl;
 
+import com.example.hotelproject.entities.TypeRent;
+import com.example.hotelproject.repository.TypeRentRepository;
 import com.example.hotelproject.service.ITypeRentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TypeRentService implements ITypeRentService {
+
+    @Autowired
+    private TypeRentRepository typeRentRepository;
     @Override
     public void deleteTypeRent(Long id) {
 
@@ -21,8 +29,8 @@ public class TypeRentService implements ITypeRentService {
     }
 
     @Override
-    public void getAllTypeRents() {
-
+    public List<TypeRent> getAllTypeRents(){
+        return typeRentRepository.findAll();
     }
 
     @Override

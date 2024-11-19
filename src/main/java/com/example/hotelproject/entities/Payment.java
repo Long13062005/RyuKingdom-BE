@@ -36,5 +36,4 @@ public class Payment {
 
     @Column(nullable = false)
     private boolean deleted = false;
-
 }
