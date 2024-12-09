@@ -21,4 +21,6 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
     @Transactional
     @Query(nativeQuery = true, value = "UPDATE Feedback f SET f.deleted = true WHERE f.id = :id")
     void softDeleteFeedbackById(Long id);
+
+
 }

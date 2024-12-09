@@ -101,8 +101,8 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
-    public List<Facility> searchEmployee(String search) {
-        return null;
+    public List<Employee> searchEmployee(String search) {
+        return employeeRepository.searchEmployee(search);
     }
 
     @Override

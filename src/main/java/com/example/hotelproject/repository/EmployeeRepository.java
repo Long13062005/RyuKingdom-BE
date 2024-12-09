@@ -22,4 +22,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
         @Transactional
         @Query(value = "UPDATE Employee e SET e.deleted = true WHERE e.id = :id", nativeQuery = true)
         void softDeleteEmployeeById(Long id);
+
+        @Query(value = "SELECT * FROM Employee WHERE name LIKE %:search% AND deleted = 0", nativeQuery = true)
+        List<Employee> searchEmployee(String search);
 }

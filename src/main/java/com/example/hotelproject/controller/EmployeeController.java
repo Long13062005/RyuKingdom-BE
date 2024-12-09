@@ -61,5 +61,14 @@ public class EmployeeController {
         }
     }
 
+    @GetMapping("/search/{name}")
+    public ResponseEntity<?> searchEmployee(@PathVariable String name) {
+        try {
+            return new ResponseEntity<>(employeeService.searchEmployee(name), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("An error occurred while fetching Employees", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 }

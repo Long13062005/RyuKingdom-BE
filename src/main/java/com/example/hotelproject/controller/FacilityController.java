@@ -61,6 +61,14 @@ public class FacilityController {
             return new ResponseEntity<>("An error occurred while deleting facility", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping("/search/{name}")
+    public ResponseEntity<?> searchFacility(@PathVariable String name) {
+        try {
+            return new ResponseEntity<>(facilityService.searchFacilities(name), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("An error occurred while fetching Employees", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
 }

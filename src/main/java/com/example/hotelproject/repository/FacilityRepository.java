@@ -12,6 +12,8 @@ import java.util.List;
 
 @Repository
 public interface FacilityRepository extends JpaRepository<Facility, Long> {
+    @Query(value = "SELECT * FROM Facility WHERE name LIKE %:search% AND deleted = 0", nativeQuery = true)
+
     List<Facility> findByNameContaining(String search);
 
     Facility findByName(String name);
