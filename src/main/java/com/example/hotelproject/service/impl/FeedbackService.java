@@ -7,6 +7,8 @@ import com.example.hotelproject.repository.CustomerRepository;
 import com.example.hotelproject.repository.FeedbackRepository;
 import com.example.hotelproject.service.IFeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,11 @@ public class FeedbackService implements IFeedbackService {
     private FeedbackRepository feedbackRepository;
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Override
+    public Page<Feedback> findFeedbacksByNameContainingIgnoreCase(Pageable pageable) {
+        return feedbackRepository.findFeedbacksByNameContainingIgnoreCase(pageable);
+    }
 
     @Override
     public List<Feedback> getAllFeedbacks() {

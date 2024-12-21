@@ -2,11 +2,13 @@ package com.example.hotelproject.service;
 
 import com.example.hotelproject.controller.dto.response.ContractDto;
 import com.example.hotelproject.entities.Contract;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface IContractService {
-    List<Contract> getAll();
+    Page<Contract> getAll(Pageable pageable);
 
     List<Contract> findByCustomer(Long id);
 

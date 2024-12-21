@@ -33,6 +33,9 @@ public class AttachFacility {
     @Column(nullable = false)
     private int unit;
 
+    @Column(name = "img_url")
+    private String imgUrl;
+
     @Column(nullable = false)
     private boolean deleted = false;
 

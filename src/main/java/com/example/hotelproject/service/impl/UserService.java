@@ -142,6 +142,7 @@ public class UserService implements IUserService {
                                 default -> "Customer";
                             }
                     );
+                    userDto.setImgUrl(customer.getImgUrl());
                     userDto.setPhoneNumber(customer.getPhoneNumber());
                     reqRes.setUserReq(userDto);
                     reqRes.setStatusCode(200);
@@ -173,6 +174,8 @@ public class UserService implements IUserService {
                     userDto.setAddress(employee.getAddress());
                     userDto.setDob(employee.getDob());
                     userDto.setPhoneNumber(employee.getPhoneNumber());
+                    userDto.setImgUrl(employee.getImgUrl());
+
                     reqRes.setUserReq(userDto);
                     reqRes.setStatusCode(200);
                     reqRes.setMessage("successful");
@@ -226,5 +229,89 @@ public class UserService implements IUserService {
             reqRes.setMessage("Error occurred while updating password: " + e.getMessage());
         }
         return reqRes;
+    }
+
+    @Override
+    public MessengerRes changeAvatar(String username, String imgUrl) {
+        {
+            {
+                MessengerRes reqRes = new MessengerRes();
+                try {
+                    User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User Not found"));
+                    Role role = roleRepository.findById(user.getRole().getId()).orElseThrow(() -> new RuntimeException("Role Not found"));
+                    if (role.getName().equals("ROLE_CUSTOMER")) {
+
+                        Customer customer = customerRepository.findByUser_Username(user.getUsername());
+                        if (customer != null) {
+                            customer.setImgUrl(imgUrl);
+                            Customer savedCustomer = customerRepository.save(customer);
+                            reqRes.setCustomer(savedCustomer);
+                            reqRes.setStatusCode(200);
+                            reqRes.setMessage("Customer updated successfully");
+                        } else {
+                            reqRes.setStatusCode(404);
+                            reqRes.setMessage("User not found for update");
+                        }
+                    } else {
+                        Employee employee = employeeRepository.findByUser_Username(user.getUsername());
+                        if (employee != null) {
+                            employee.setImgUrl(imgUrl);
+                            Employee savedEmployee = employeeRepository.save(employee);
+                            reqRes.setEmployee(savedEmployee);
+                            reqRes.setStatusCode(200);
+                            reqRes.setMessage("User updated successfully");
+                        } else {
+                            reqRes.setStatusCode(404);
+                            reqRes.setMessage("User not found for update");
+                        }
+                    }
+                } catch (Exception e) {
+                    reqRes.setStatusCode(500);
+                    reqRes.setMessage("Error occurred while updating user: " + e.getMessage());
+                }
+                return reqRes;
+            }
+        }    }
+
+    @Override
+    public MessengerRes getAvatar(String username) {
+        {
+            MessengerRes reqRes = new MessengerRes();
+            try {
+                User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User Not found"));
+
+                if(user == null) {
+                    reqRes.setStatusCode(404);
+                    reqRes.setMessage("User not found");
+                    return reqRes;
+                }
+                Role role = roleRepository.findById(user.getRole().getId()).orElseThrow(() -> new RuntimeException("Role Not found"));
+                UserReq userDto = new UserReq();
+                if(role.getName().equals("ROLE_CUSTOMER")) {
+                    Customer customer = customerRepository.findByUser_Username(user.getUsername());
+                    {
+                        userDto.setImgUrl(customer.getImgUrl());
+                        reqRes.setUserReq(userDto);
+                        reqRes.setStatusCode(200);
+                        reqRes.setMessage("successful");
+                    }
+                    return reqRes;
+                } else {
+                    Employee employee = employeeRepository.findByUser_Username(user.getUsername());
+                    {
+                        userDto.setImgUrl(employee.getImgUrl());
+
+                        reqRes.setUserReq(userDto);
+                        reqRes.setStatusCode(200);
+                        reqRes.setMessage("successful");
+                    }
+                    return reqRes;
+                }
+
+            } catch (Exception e) {
+                reqRes.setStatusCode(500);
+                reqRes.setMessage("Error occurred while getting user info: " + e.getMessage());
+            }
+            return reqRes;    }
     }
 }

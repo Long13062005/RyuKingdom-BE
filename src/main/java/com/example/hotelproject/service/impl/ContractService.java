@@ -6,6 +6,8 @@ import com.example.hotelproject.repository.*;
 import com.example.hotelproject.service.IContractService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,8 +26,8 @@ public class ContractService implements IContractService {
     private PaymentRepository paymentRepository;
 
     @Override
-    public List<Contract> getAll() {
-        return contractRepository.getAll();
+    public Page<Contract> getAll(Pageable pageable) {
+        return contractRepository.getAll(pageable);
     }
 
     @Override

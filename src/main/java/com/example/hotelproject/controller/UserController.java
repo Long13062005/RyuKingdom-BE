@@ -23,6 +23,20 @@ public class UserController {
         return ResponseEntity.ok(userService.updateUserInfo(username, reqres));
     }
 
+    @PutMapping("/adminstaffcus/avatar/update")
+    public ResponseEntity<MessengerRes> updateAvatar(@RequestBody UserReq reqres){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        return ResponseEntity.ok(userService.changeAvatar(username, reqres.getImgUrl()));
+    }
+
+    @GetMapping("/adminstaffcus/avatar")
+    public ResponseEntity<MessengerRes> getAvatar(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        return ResponseEntity.ok(userService.getAvatar(username));
+    }
+
 
     @PutMapping("/adminstaffcus/update/password")
     public ResponseEntity<MessengerRes> updateUserPassword(@RequestBody ChangePasswordRequest reqres){

@@ -10,6 +10,8 @@ import com.example.hotelproject.repository.PaymentRepository;
 import com.example.hotelproject.service.IPaymentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +24,12 @@ public class PaymentService implements IPaymentService {
     private CustomerRepository customerRepository;
 @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Override
+    public Page<Payment> findPaymentsByNameContainingIgnoreCase(String title, Pageable pageable) {
+        return paymentRepository.findPaymentsByNameContainingIgnoreCase(title, pageable);
+    }
+
     @Override
     public List<Payment> getAllPayments() {
         return paymentRepository.getAll();

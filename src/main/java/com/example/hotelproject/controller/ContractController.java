@@ -1,10 +1,15 @@
 package com.example.hotelproject.controller;
 
 import com.example.hotelproject.controller.dto.response.ContractDto;
+import com.example.hotelproject.entities.Contract;
 import com.example.hotelproject.entities.Customer;
+import com.example.hotelproject.entities.Employee;
 import com.example.hotelproject.service.impl.ContractService;
 import com.example.hotelproject.service.impl.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -22,11 +27,20 @@ public class ContractController {
 
 
     @GetMapping()
-    public ResponseEntity<?> showAllContracts() {
+    public ResponseEntity<?> showAllContracts(
+            @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false, defaultValue = "4") int size
+    ) {
         try {
-            return new ResponseEntity<>(contractService.getAll(), HttpStatus.OK);
+            Pageable pageable = PageRequest.of(page, size);
+            Page<Contract> contracts = contractService.getAll(pageable);
+
+            if (contracts.isEmpty()) {
+                return new ResponseEntity<>("No contracts found", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(contracts, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("An error occurred while fetching Contracts", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("An error occurred while fetching contracts", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @GetMapping("/customer")

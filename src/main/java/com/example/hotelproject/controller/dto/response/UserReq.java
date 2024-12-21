@@ -28,4 +28,6 @@ public class UserReq {
     private String division;
     private String position;
     private String role;
+    private String imgUrl;
+
 }

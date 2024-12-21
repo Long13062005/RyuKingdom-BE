@@ -49,6 +49,9 @@ public class Facility {
     @JoinColumn(name = "facility_type_id", nullable = false)
     private TypeFacility typeFacility;
 
+    @Column(name = "img_url")
+    private String imgUrl;
+
     @Column(nullable = false)
     private boolean deleted = false;
 

@@ -8,6 +8,8 @@ import com.example.hotelproject.repository.TypeFacilityRepository;
 import com.example.hotelproject.repository.TypeRentRepository;
 import com.example.hotelproject.service.IFacilityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +23,12 @@ public class FacilityService implements IFacilityService {
         @Autowired
         private TypeFacilityRepository typeFacilityRepository;
 
-        @Override
+    @Override
+    public Page<Facility> findFacilityByName(String name, Pageable pageable) {
+        return facilityRepository.findFacilitysByNameContainingIgnoreCase(name, pageable);
+    }
+
+    @Override
         public List<Facility> findAll() {
                 return facilityRepository.getAll();
         }
@@ -55,6 +62,7 @@ public class FacilityService implements IFacilityService {
                 facility.setDescription(facilityDto.getDescription());
                 facility.setPoolArea(facilityDto.getPoolArea());
                 facility.setNumberOfFloors(facilityDto.getFloor());
+                facility.setImgUrl(facilityDto.getImgUrl());
                 facility.setTypeFacility(typeFacilityRepository.findByName(facilityDto.getFacilityType()));
                 facility.setTypeRent(typeRentRepository.findByName(facilityDto.getRentType()));
                 facility.setDeleted(false);
@@ -77,6 +85,7 @@ public class FacilityService implements IFacilityService {
                 facility.setName(facilityDto.getName());
                 facility.setArea(facilityDto.getArea());
                 facility.setCost(facilityDto.getCost());
+                facility.setImgUrl(facilityDto.getImgUrl());
                 facility.setMaxPeople(facilityDto.getMaxPeople());
                 facility.setStandardRoom(facilityDto.getStandardRoom());
                 facility.setDescription(facilityDto.getDescription());

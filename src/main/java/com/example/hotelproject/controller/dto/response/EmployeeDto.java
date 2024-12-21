@@ -28,5 +28,6 @@ public class EmployeeDto {
     private String phoneNumber;
     private String email;
     private String address;
+    private String imgUrl;
     private boolean deleted = false;
 }

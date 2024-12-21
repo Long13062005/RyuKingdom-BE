@@ -7,6 +7,8 @@ import com.example.hotelproject.repository.EmployeeRepository;
 import com.example.hotelproject.repository.ReportRepository;
 import com.example.hotelproject.service.IReportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +23,11 @@ public class ReportService implements IReportService {
     @Override
     public List<Report> getAllReports() {
         return reportRepository.getAll();
+    }
+
+    @Override
+    public Page<Report> findReportsByNameContainingIgnoreCase(String name, Pageable pageable) {
+        return reportRepository.findReportsByNameContainingIgnoreCase(name, pageable);
     }
 
     @Override

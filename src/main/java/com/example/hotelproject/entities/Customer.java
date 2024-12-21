@@ -37,6 +37,8 @@ public class Customer {
     private String email;
     @Column(nullable = false)
     private String address;
+    @Column(name = "img_url")
+    private String imgUrl;
 
     private boolean deleted = false;
 }

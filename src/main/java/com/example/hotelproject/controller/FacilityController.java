@@ -4,9 +4,14 @@ import com.example.hotelproject.controller.dto.response.FacilityDto;
 import com.example.hotelproject.entities.Facility;
 import com.example.hotelproject.service.impl.FacilityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+
 
 @RestController
 @RequestMapping("/api/facilities")
@@ -17,11 +22,32 @@ public class FacilityController {
 
 
     @GetMapping()
-    public ResponseEntity<?> showAllFacilities() {
+    public ResponseEntity<?> showAllFacilities(
+            @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false, defaultValue = "4") int size,
+            @RequestParam(required = false, defaultValue = "") String name
+    ) {
         try {
-            return new ResponseEntity<>(facilityService.findAll(), HttpStatus.OK);
+            Pageable pageable = PageRequest.of(page, size);
+            Page<Facility> facility = facilityService.findFacilityByName(name, pageable);
+
+            if (facility.isEmpty()) {
+                return new ResponseEntity<>("No Facility found", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(facility, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("An error occurred while fetching facilities", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/all")
+    public ResponseEntity<?> showAllFacilities() {
+        try {
+            if (facilityService.findAll().isEmpty()) {
+                return new ResponseEntity<>("No Facilities found", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(facilityService.findAll(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("An error occurred while fetching Facilities", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @GetMapping("/{id}")

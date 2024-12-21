@@ -8,6 +8,8 @@ import com.example.hotelproject.repository.*;
 import com.example.hotelproject.security.user_auth.model.User;
 import com.example.hotelproject.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,11 @@ public class EmployeeService implements IEmployeeService {
     private RoleRepository roleRepository;
     @Autowired
     private UserRepository userRepository;
+
+    @Override
+    public Page<Employee> findEmployeesByName(String name, Pageable pageable) {
+        return employeeRepository.findEmployeesByNameContainingIgnoreCase(name, pageable);
+    }
 
     @Override
     public List<Employee> findAll() {

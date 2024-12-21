@@ -3,6 +3,8 @@ package com.example.hotelproject.repository;
 import com.example.hotelproject.entities.Contract;
 import com.example.hotelproject.entities.Facility;
 import com.example.hotelproject.entities.Payment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,11 +17,10 @@ import java.util.List;
 @Repository
 public interface ContractRepository extends JpaRepository<Contract, Long> {
     @Query(nativeQuery = true, value = "SELECT * FROM contract where deleted = 0")
-    List<Contract> getAll();
+    Page<Contract> getAll(Pageable pageable);
 
     @Query(value = "SELECT * FROM contract where customer_id = :id and deleted = 0", nativeQuery = true)
     List<Contract> findByCustomer(Long id);
-
 
     @Modifying
     @Transactional

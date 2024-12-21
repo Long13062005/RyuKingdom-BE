@@ -8,6 +8,9 @@ import com.example.hotelproject.service.impl.CustomerService;
 import com.example.hotelproject.service.impl.FacilityService;
 import com.example.hotelproject.service.impl.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -25,6 +28,22 @@ public class PaymentController {
 
 
     @GetMapping()
+    public ResponseEntity<?> showAllPayments( @RequestParam(required = false, defaultValue = "0") int page,
+                                              @RequestParam(required = false, defaultValue = "4") int size,
+                                              @RequestParam(required = false, defaultValue = "") String name
+    ) {
+        try {
+            Pageable pageable = PageRequest.of(page, size);
+            Page<Payment> payments = paymentService.findPaymentsByNameContainingIgnoreCase(name, pageable);
+            if (payments.isEmpty()) {
+                return new ResponseEntity<>("No payments found", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(payments, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("An error occurred while fetching payments", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/all")
     public ResponseEntity<?> showAllPayments() {
         try {
             return new ResponseEntity<>(paymentService.getAllPayments(), HttpStatus.OK);

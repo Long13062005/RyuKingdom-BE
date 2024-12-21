@@ -116,7 +116,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
             adminEmployee.setGender(1);
             adminEmployee.setIdCard("123456789");
             adminEmployee.setName("admin");
-            adminEmployee.setPhoneNumber("123456789");
+            adminEmployee.setPhoneNumber("1234567891");
             adminEmployee.setPosition(positionRepository.findByName("HANOI"));
             adminEmployee.setSalary(10000000.0);
             employeeRepository.save(adminEmployee);
@@ -138,7 +138,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
             staffEmployee.setGender(1);
             staffEmployee.setIdCard("987654321");
             staffEmployee.setName("staff");
-            staffEmployee.setPhoneNumber("987654321");
+            staffEmployee.setPhoneNumber("9876543211");
             staffEmployee.setPosition(positionRepository.findByName("HANOI"));
             staffEmployee.setSalary(8000000.0);
             employeeRepository.save(staffEmployee);
@@ -160,7 +160,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
             managerEmployee.setGender(1);
             managerEmployee.setIdCard("112233445");
             managerEmployee.setName("manager");
-            managerEmployee.setPhoneNumber("112233445");
+            managerEmployee.setPhoneNumber("1122334451");
             managerEmployee.setPosition(positionRepository.findByName("HANOI"));
             managerEmployee.setSalary(15000000.0);
             employeeRepository.save(managerEmployee);
@@ -177,7 +177,64 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
             customer1.setDob("1985-01-01");
             customer1.setEmail("customer@gmail.com");
             customer1.setGender(1);
-            customer1.setIdCard("112233445");
+            customer1.setIdCard("1122334451");
+            customer1.setName("customer");
+            customer1.setPhoneNumber("112233445");
+            customer1.setTypeCustomer(typeCustomerRepository.findByName("BRONZE"));
+            customer1.setDeleted(false);
+            customerRepository.save(customer1);
+        }
+        if (userRepository.findByUsername("customer1234").isEmpty()) {
+            User customer = new User();
+            customer.setUsername("customer1234");
+            customer.setPassword(passwordEncoder.encode("customer1234"));
+            customer.setRole(roleRepository.findByName("ROLE_CUSTOMER"));
+            userRepository.save(customer);
+            Customer customer1 = new Customer();
+            customer1.setUser(customer);
+            customer1.setAddress("Hanoi");
+            customer1.setDob("1985-01-01");
+            customer1.setEmail("customer@gmail.com");
+            customer1.setGender(1);
+            customer1.setIdCard("1122334451");
+            customer1.setName("customer");
+            customer1.setPhoneNumber("112233445");
+            customer1.setTypeCustomer(typeCustomerRepository.findByName("BRONZE"));
+            customer1.setDeleted(false);
+            customerRepository.save(customer1);
+        }
+        if (userRepository.findByUsername("customer12345").isEmpty()) {
+            User customer = new User();
+            customer.setUsername("customer12345");
+            customer.setPassword(passwordEncoder.encode("customer12345"));
+            customer.setRole(roleRepository.findByName("ROLE_CUSTOMER"));
+            userRepository.save(customer);
+            Customer customer1 = new Customer();
+            customer1.setUser(customer);
+            customer1.setAddress("Hanoi");
+            customer1.setDob("1985-01-01");
+            customer1.setEmail("customer@gmail.com");
+            customer1.setGender(1);
+            customer1.setIdCard("1122334451");
+            customer1.setName("customer");
+            customer1.setPhoneNumber("112233445");
+            customer1.setTypeCustomer(typeCustomerRepository.findByName("BRONZE"));
+            customer1.setDeleted(false);
+            customerRepository.save(customer1);
+        }
+        if (userRepository.findByUsername("customer123456").isEmpty()) {
+            User customer = new User();
+            customer.setUsername("customer123456");
+            customer.setPassword(passwordEncoder.encode("customer123456"));
+            customer.setRole(roleRepository.findByName("ROLE_CUSTOMER"));
+            userRepository.save(customer);
+            Customer customer1 = new Customer();
+            customer1.setUser(customer);
+            customer1.setAddress("Hanoi");
+            customer1.setDob("1985-01-01");
+            customer1.setEmail("customer@gmail.com");
+            customer1.setGender(1);
+            customer1.setIdCard("1122334451");
             customer1.setName("customer");
             customer1.setPhoneNumber("112233445");
             customer1.setTypeCustomer(typeCustomerRepository.findByName("BRONZE"));
@@ -210,6 +267,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
             facility.setMaxPeople(2);
             facility.setStandardRoom("STANDARD");
             facility.setDescription("Standard room");
+            facility.setImgUrl("https://firebasestorage.googleapis.com/v0/b/ryukingdom-48b31.appspot.com/o/standard-room.jpg?alt=media&token=63c4edb3-7a35-410c-b296-c733172e0af2");
             facility.setPoolArea(0);
             facility.setNumberOfFloors(1);
             facility.setTypeFacility(typeFacilityRepository.findByName("ROOM"));
@@ -227,6 +285,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
             facility.setDescription("Deluxe Room");
             facility.setPoolArea(0);
             facility.setNumberOfFloors(1);
+            facility.setImgUrl("https://firebasestorage.googleapis.com/v0/b/ryukingdom-48b31.appspot.com/o/dex-room.jpg?alt=media&token=a169c143-a513-48d4-99cc-40d165114d88");
             facility.setTypeFacility(typeFacilityRepository.findByName("ROOM"));
             facility.setTypeRent(typeRentRepository.findByName("HOUR"));
             facility.setDeleted(false);
@@ -242,6 +301,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
             facility.setDescription("Executive Room");
             facility.setPoolArea(0);
             facility.setNumberOfFloors(1);
+            facility.setImgUrl("https://firebasestorage.googleapis.com/v0/b/ryukingdom-48b31.appspot.com/o/ex-room.jpg?alt=media&token=e832ebf7-d112-4de3-a5b4-a2a54535be6c");
             facility.setTypeFacility(typeFacilityRepository.findByName("ROOM"));
             facility.setTypeRent(typeRentRepository.findByName("DAY"));
             facility.setDeleted(false);
@@ -259,6 +319,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
             facility.setNumberOfFloors(1);
             facility.setTypeFacility(typeFacilityRepository.findByName("SUITE"));
             facility.setTypeRent(typeRentRepository.findByName("DAY"));
+            facility.setImgUrl("https://firebasestorage.googleapis.com/v0/b/ryukingdom-48b31.appspot.com/o/suite.jpg?alt=media&token=a08fdd7d-2060-46cb-b4aa-79ca387c2a8f");
             facility.setDeleted(false);
             facilityRepository.save(facility);
         }
@@ -266,6 +327,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
             Facility facility = new Facility();
             facility.setName("SUITE 2");
             facility.setCost(1500);
+            facility.setImgUrl("https://firebasestorage.googleapis.com/v0/b/ryukingdom-48b31.appspot.com/o/suite-big.jpg?alt=media&token=a9055a45-a8dc-49fb-95c2-f539ca37c56c");
             facility.setArea(100);
             facility.setMaxPeople(8);
             facility.setStandardRoom("Presidential Suite");
@@ -280,6 +342,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
         if (facilityRepository.findByName("Villa 1") == null) {
             Facility facility = new Facility();
             facility.setName("Villa 1");
+            facility.setImgUrl("https://firebasestorage.googleapis.com/v0/b/ryukingdom-48b31.appspot.com/o/villa.jpg?alt=media&token=884beb65-c03b-40f0-ae02-c29e7b354361");
             facility.setCost(2000);
             facility.setArea(300);
             facility.setMaxPeople(8);

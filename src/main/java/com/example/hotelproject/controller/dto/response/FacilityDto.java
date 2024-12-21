@@ -37,5 +37,7 @@ public class FacilityDto {
 
     private String facilityType;
 
+    private String imgUrl;
+
     private boolean deleted = false;
 }

@@ -4,10 +4,15 @@ import com.example.hotelproject.controller.dto.response.PaymentDto;
 import com.example.hotelproject.entities.Customer;
 import com.example.hotelproject.entities.Employee;
 import com.example.hotelproject.entities.Payment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 public interface IPaymentService {
+    Page<Payment> findPaymentsByNameContainingIgnoreCase(@Param("title") String title, Pageable pageable);
+
 
     List<Payment> getAllPayments();
 

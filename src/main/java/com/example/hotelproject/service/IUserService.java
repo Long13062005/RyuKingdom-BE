@@ -11,5 +11,9 @@ public interface IUserService {
      MessengerRes getMyInfo(String username);
 
      MessengerRes updatePassword(String username, ChangePasswordRequest updatePasswords);
+     MessengerRes changeAvatar(String username, String imgUrl);
+     MessengerRes getAvatar(String username);
+
+
 
 }

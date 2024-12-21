@@ -4,6 +4,8 @@ import com.example.hotelproject.entities.Customer;
 import com.example.hotelproject.repository.CustomerRepository;
 import com.example.hotelproject.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +13,12 @@ import java.util.List;
 public class CustomerService implements ICustomerService {
 @Autowired
 private CustomerRepository customerRepository;
+
+    @Override
+    public Page<Customer> findCustomersByName(String name, Pageable pageable) {
+        return customerRepository.findCustomersByNameContainingIgnoreCase(name, pageable);
+    }
+
     @Override
     public List<Customer> findAll() {
         return customerRepository.getAll();
